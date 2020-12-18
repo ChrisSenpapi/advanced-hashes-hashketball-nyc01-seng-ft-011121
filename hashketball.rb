@@ -127,3 +127,64 @@ def game_hash
 end
 
 
+def num_points_scored(name)
+  game_hash = game_hash()
+  home = game_hash[:home][:players].keys
+  away = game_hash[:away][:players].keys
+  if home.include?(name)
+    return game_hash[:home][:players][name][:points].to_i
+  else
+    return game_hash[:away][:players][name][:points].to_i
+  end
+end
+
+
+def shoe_size(name)
+  game_hash = game_hash()
+  home = game_hash[:home][:players].keys
+  away = game_hash[:away][:players].keys
+  if home.include?(name)
+    return game_hash[:home][:players][name][:shoe].to_i
+  else
+    return game_hash[:away][:players][name][:shoe].to_i
+  end
+end
+
+
+def team_colors(team)
+  if game_hash[:home][:team_name] == team
+    return game_hash[:home][:colors]
+  else
+    return game_hash[:away][:colors]
+  end
+end
+
+
+def team_names
+  return [game_hash[:home][:team_name], game_hash[:away][:team_name]]
+end
+
+
+def player_numbers(team)
+  numbers = []
+  if game_hash[:home][:team_name] == team
+    numbers = game_hash[:home][:players].keys.collect do |x|
+      game_hash[:home][:players][x][:number]
+    end
+  else
+    numbers = game_hash[:away][:players].keys.collect do |x|
+    game_hash[:away][:players][x][:number]
+    end
+  end
+  return numbers
+end
+
+
+def player_stats(player)
+  if game_hash[:home][:players].keys.include?(player)
+    return game_hash[:home][:players][player]
+  else
+    return game_hash[:away][:players][player]
+  end
+end
+
