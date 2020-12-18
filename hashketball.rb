@@ -192,16 +192,14 @@ def player_numbers(team_name)
 end
 
 
-def player_stats(player_name)
-  game_hash.each do |location, team_data|
-    team_data[:players].each do |data_item|
-      if data_item[:player_name] == player_name
-        return data_item.dup.tap do |player_stats|
-          player_stats.delete(:player_name)
-        end
+def player_stats(player)
+  game_hash.each{|home_away, keys|
+    keys[:players].each{|name|
+      if name[:player_name] == player
+        return name
       end
-    end
-  end
+    }
+  }
 end
 
 
